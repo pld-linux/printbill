@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/AUTHORS docs/BUGS docs/COLOURTHEORY.txt docs/HOWTO docs/NEWS docs/README.performance docs/TODO docs/VERSION docs/changelog
+%doc docs/* examples/print* examples/*.html
 
 %config %{_sysconfdir}/printbill/*
 
