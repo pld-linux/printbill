@@ -8,6 +8,7 @@ License:	GPL
 Group:		Applications/Printing
 Vendor:		Daniel Franklin
 Source0:	http://ieee.uow.edu.au/~daniel/software/printbill/dist/%{name}_%{version}.tar.gz
+# Source0-md5:	308e63c5dfea228738f13d69ac995856
 Source1:	%{name}.init
 Patch0:		%{name}-no_root.patch
 URL:		http://ieee.uow.edu.au/~daniel/software/printbill/
