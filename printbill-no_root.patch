@@ -1,0 +1,83 @@
+diff -ur printbill-4.0.6.orig/Config printbill-4.0.6/Config
+--- printbill-4.0.6.orig/Config.redhat	Tue Sep 24 23:39:02 2002
++++ printbill-4.0.6/Config.redhat	Wed Sep 25 11:25:18 2002
+@@ -19,7 +19,7 @@
+ DO_CGI = y
+ 
+ # Where your system keeps its CGI scripts
+-CGI_BIN = /var/www/cgi-bin
++CGI_BIN = /var/lib/printbill/cgi-bin
+ 
+ # Where your init script should go
+ INITDIR = /etc/rc.d/init.d
+@@ -28,7 +28,7 @@
+ INITSTYLE = sysv
+ 
+ # If you use sysv, specify the location of the symlink
+-SYSVLINKDIR = /etc/rc2.d
++SYSVLINKDIR = /etc/rc.d/rc3.d
+ 
+ # If you use sysv, specify the name of the symlink
+ SYSVLINK = S19printbill
+diff -ur printbill-4.0.6.orig/Makefile printbill-4.0.6/Makefile
+--- printbill-4.0.6.orig/Makefile	Tue Sep 24 23:39:02 2002
++++ printbill-4.0.6/Makefile	Wed Sep 25 11:25:01 2002
+@@ -17,26 +17,26 @@
+ 	mkdir -p $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
+ 	mkdir -p $(DESTDIR)$(PMOD_HOME)/Printbill
+ 	
+-	install -o $(OWNER) -g $(GROUP) -m 0755 $(BIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
+-	install -o $(OWNER) -g $(GROUP) -m 0755 $(SBIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/sbin
+-	install -o $(OWNER) -g $(GROUP) -m 0644 $(PERL_MODS) $(DESTDIR)$(PMOD_HOME)/Printbill
+-	install -o $(OWNER) -g $(GROUP) -m 0644 $(MAN1_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man1
+-	install -o $(OWNER) -g $(GROUP) -m 0644 $(MAN5_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man5
+-	install -o $(OWNER) -g $(GROUP) -m 0644 $(MAN8_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
++	install -m 0755 $(BIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
++	install -m 0755 $(SBIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/sbin
++	install -m 0644 $(PERL_MODS) $(DESTDIR)$(PMOD_HOME)/Printbill
++	install -m 0644 $(MAN1_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man1
++	install -m 0644 $(MAN5_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man5
++	install -m 0644 $(MAN8_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
+ 
+ 	if [ ${DO_CGI} = "y" ] ; then\
+ 		mkdir -p $(DESTDIR)$(CGI_BIN) ; \
+-		install -o $(OWNER) -g $(GROUP) -m 0755 $(CGI_SCRIPTS) $(DESTDIR)$(CGI_BIN) ; \
++		install -m 0755 $(CGI_SCRIPTS) $(DESTDIR)$(CGI_BIN) ; \
+ 	fi;
+ 
+ 	install -d -m 0755 $(DESTDIR)/etc/printbill
+-	install -o $(OWNER) -g $(GROUP) -m 644 $(CONFIG_FILES) $(DESTDIR)/etc/printbill
++	install -m 644 $(CONFIG_FILES) $(DESTDIR)/etc/printbill
+ 	
+-	install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
+-	install -o $(OWNER) -g $(GROUP) -m 0644 docs/* $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
+-	install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
+-	install -o $(OWNER) -g $(GROUP) -m 0755 perl/buy perl/printbill_billme $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
+-	install -o $(OWNER) -g $(GROUP) -m 0644 examples/example_pq.html examples/printbillrc examples/printcap $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
++	install -d -m 0755 $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
++	install -m 0644 docs/* $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
++	install -d -m 0755 $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
++	install  -m 0755 perl/buy perl/printbill_billme $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
++	install  -m 0644 examples/example_pq.html examples/printbillrc examples/printcap $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
+ 
+ 	@echo
+ 	@echo Installation completed. Assuming you didn\'t see any horrible error messages,
+@@ -52,12 +52,12 @@
+ 	@echo
+ 
+ install-init:
+-	install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(INITDIR)
+-	install -o $(OWNER) -g $(GROUP) -m 0755 $(INITSCRIPTDIR)/$(INITSCRIPT) $(DESTDIR)$(INITDIR)
++	install -d -m 0755  $(DESTDIR)$(INITDIR)
++	install  -m 0755 $(INITSCRIPTDIR)/$(INITSCRIPT) $(DESTDIR)$(INITDIR)
+ 
+ 	if [ ${INITSTYLE} = "sysv" ] ; then\
+-		install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(SYSVLINKDIR) ; \
++		install -d -m 0755  $(DESTDIR)$(SYSVLINKDIR) ; \
+ # This one should be absolute - RedHat & Debian use the same
+ 		ln -sf ../init.d/$(INITSCRIPT) $(DESTDIR)$(SYSVLINKDIR)/$(SYSVLINK) ; \
+ 	fi;
+-	
+\ No newline at end of file
++	
+Only in printbill-4.0.6: Makefile~
