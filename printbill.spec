@@ -1,7 +1,7 @@
 %include	/usr/lib/rpm/macros.perl
 Name:		printbill
-Summary:	Sophistocated print billing / accounting system for lprng
-Summary(pl):	Wymy¶lny system rozliczania / kontroli dla lprng
+Summary:	Sophistocated print billing / accounting system for LPRng
+Summary(pl):	Wymy¶lny system rozliczania / kontroli dla LPRng
 Version:	4.2.0
 Release:	2
 License:	GPL
@@ -44,7 +44,7 @@ interface (for non-tech people).
 %description -l pl
 Printbill oblicza ilo¶æ tuszu/toneru i liczbê stron u¿ywan± podczas
 drukowania dokumentu. Wykorzystuje ghostscripta do konwersji plików
-postscriptowych do bitmap png, nastêpnie oblicza stopieñ zaczernienia
+postscriptowych do bitmap PNG, nastêpnie oblicza stopieñ zaczernienia
 lub koloru do obliczenia zu¿ycia tuszu. Cennik mo¿e byæ niezale¿nie
 ustawiony dla ka¿dej drukarki, ustawiaj±c przeliczniki na czarny i
 kolorowy tusz/toner oraz strony. Obliczanie cen wymaga sporej mocy
@@ -53,11 +53,11 @@ procesów - zadania mog± nie byæ drukowane w kolejno¶ci wysy³ania do
 kolejki. Na maszynach SMP wykorzysta moc wszystkich zainstalowanych
 procesorów.
 
-U¿ytkownicy moga mieæ ustalan± quotê i jest ona automatycznie
+U¿ytkownicy mog± mieæ ustalan± quotê i jest ona automatycznie
 zmniejszana podczas drukowania. Alternatywnie mo¿na ustawiæ accounting
 bez rozliczania dla u¿ytkownika lub drukarki. Printbill zachowuje
 tak¿e dok³adne statystyki które mog± byæ interesuj±ce dla
-administratorów. System mo¿e byæ zarz±dzany przez narzêdzia z lini
+administratorów. System mo¿e byæ zarz±dzany przez narzêdzia z linii
 poleceñ, jak te¿ przez interfejs web.
 
 %prep
