@@ -1,0 +1,57 @@
+#! /bin/sh
+#
+# chkconfig: 2345 60 20
+# description: printbill daemon
+# processname: printbilld
+#
+# On RedHat systems this will start it just before lprng
+# so the socket is read and waiting when lprng starts.
+
+# Get config.
+#. /etc/sysconfig/network
+
+# Get functions
+. /etc/rc.d/init.d/functions
+
+[ -f /etc/sysconfig/printbill ] && . /etc/sysconfig/printbill
+
+RETVAL=0
+
+# See how we were called.
+case "$1" in
+ start)
+ 	if [ ! -f /var/lock/subsys/printbilld ]; then
+ 		msg_starting printbill
+		daemon printbilld
+		RETVAL=$?
+	else 
+		msg_Already_Running printbill
+		exit 1
+	fi
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/printbilld
+	;;
+ stop)
+	msg_stopping printbill
+	killproc printbilld
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/printbilld
+	;;
+ status)
+ 	status printbilld
+	;;
+ restart)
+ 	$0 stop
+	$0 start
+	;;
+ reload)
+	msg_reloading printbill
+	killproc printbilld -HUP
+	RETVAL=$?
+	return $RETVAL
+ 	;;
+ *)
+	msg_Usage "$0 {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit $?
