@@ -16,8 +16,6 @@
 [ -f /etc/sysconfig/printbill ] && . /etc/sysconfig/printbill
 
 RETVAL=0
-
-
 # See how we were called.
 case "$1" in
   start)
@@ -25,17 +23,15 @@ case "$1" in
  		msg_starting printbill
 		daemon printbilld
 		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/printbilld
 	else 
 		msg_already_running printbill
-		exit 1
 	fi
-	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/printbilld
 	;;
   stop)
 	if [ -f /var/lock/subsys/printbilld ]; then
 		msg_stopping printbill
 		killproc printbilld
-		RETVAL=$?
 		rm -f /var/lock/subsys/printbilld
 	else
 		msg_not_running printbill
@@ -43,24 +39,26 @@ case "$1" in
 	;;
   status)
  	status printbilld
+	exit $?
 	;;
   restart)
  	$0 stop
 	$0 start
-	RETVAL=$?
+	exit $?
 	;;
-  reload)
+  reload|force-reload)
 	if [ -f /var/lock/subsys/printbilld ]; then
 		msg_reloading printbill
 		killproc printbilld -HUP
 		RETVAL=$?
 	else
-		msg_not_running printbill
+		msg_not_running printbill >&2
+		exit 7
 	fi 
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
