@@ -17,41 +17,50 @@
 
 RETVAL=0
 
+
 # See how we were called.
 case "$1" in
- start)
+  start)
  	if [ ! -f /var/lock/subsys/printbilld ]; then
  		msg_starting printbill
 		daemon printbilld
 		RETVAL=$?
 	else 
-		msg_Already_Running printbill
+		msg_already_running printbill
 		exit 1
 	fi
 	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/printbilld
 	;;
- stop)
-	msg_stopping printbill
-	killproc printbilld
-	RETVAL=$?
-	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/printbilld
+  stop)
+	if [ -f /var/lock/subsys/printbilld ]; then
+		msg_stopping printbill
+		killproc printbilld
+		RETVAL=$?
+		rm -f /var/lock/subsys/printbilld
+	else
+		msg_not_running printbill
+	fi
 	;;
- status)
+  status)
  	status printbilld
 	;;
- restart)
+  restart)
  	$0 stop
 	$0 start
-	;;
- reload)
-	msg_reloading printbill
-	killproc printbilld -HUP
 	RETVAL=$?
-	return $RETVAL
- 	;;
- *)
-	msg_Usage "$0 {start|stop|status|restart|reload}"
+	;;
+  reload)
+	if [ -f /var/lock/subsys/printbilld ]; then
+		msg_reloading printbill
+		killproc printbilld -HUP
+		RETVAL=$?
+	else
+		msg_not_running printbill
+	fi 
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|reload|status}"
 	exit 1
 esac
 
-exit $?
+exit $RETVAL
