@@ -1,24 +1,24 @@
-%include        /usr/lib/rpm/macros.perl
+%include	/usr/lib/rpm/macros.perl
 Name:		printbill
 Summary:	Sophistocated print billing / accounting system for lprng
 Summary(pl):	Wymy¶lny system rozliczania / kontroli dla lprng
-Version:	4.0.6
-Release:	0.3
+Version:	4.2.0
+Release:	0.1
 License:	GPL
 Group:		Applications/Printing
 Vendor:		Daniel Franklin
 Source0:	http://ieee.uow.edu.au/~daniel/software/printbill/dist/%{name}_%{version}.tar.gz
-# Source0-md5:	308e63c5dfea228738f13d69ac995856
+# Source0-md5:	764bc949784a5cccd5eb55887dccdc46
 Source1:	%{name}.init
 Patch0:		%{name}-no_root.patch
 URL:		http://ieee.uow.edu.au/~daniel/software/printbill/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	libpng-devel
 Requires:	LPRng
 Requires:	ghostscript
 Requires:	ghostscript-fonts
 Requires:	gnuplot
 Requires:	samba
-BuildRequires:	libpng-devel
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Printbill calculates the amount of ink/toner and the number of pages
