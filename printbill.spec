@@ -3,7 +3,7 @@ Name:		printbill
 Summary:	Sophistocated print billing / accounting system for lprng
 Summary(pl):	Wymy¶lny system rozliczania / kontroli dla lprng
 Version:	4.0.6
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		Applications/Printing
 Vendor:		Daniel Franklin
@@ -70,6 +70,7 @@ ln -sf Config.redhat Config
 rm -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 install -D %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
 
 %post
 if [ -e /etc/printbill/printbillrc ] ; then
@@ -108,4 +109,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_mandir}/man8/*
-#/var/www/cgi-bin/*
+%dir /var/lib/%{name}/
+%attr(755,root,root) /var/lib/%{name}/cgi-bin/*.pl
