@@ -1,8 +1,8 @@
 #! /bin/sh
 #
-# chkconfig: 2345 60 20
-# description: printbill daemon
-# processname: printbilld
+# chkconfig:	2345 60 20
+# description:	printbill daemon
+# processname:	printbilld
 #
 # On RedHat systems this will start it just before lprng
 # so the socket is read and waiting when lprng starts.
