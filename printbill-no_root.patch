@@ -1,6 +1,6 @@
-diff -ur printbill-4.0.6.orig/Config printbill-4.0.6/Config
---- printbill-4.0.6.orig/Config.redhat	Tue Sep 24 23:39:02 2002
-+++ printbill-4.0.6/Config.redhat	Wed Sep 25 11:25:18 2002
+diff -urN printbill-4.2.0.orig/Config.redhat printbill-4.2.0/Config.redhat
+--- printbill-4.2.0.orig/Config.redhat	2003-05-06 03:43:58.000000000 +0200
++++ printbill-4.2.0/Config.redhat	2003-08-09 14:53:01.000000000 +0200
 @@ -19,7 +19,7 @@
  DO_CGI = y
  
@@ -15,69 +15,88 @@ diff -ur printbill-4.0.6.orig/Config printbill-4.0.6/Config
  
  # If you use sysv, specify the location of the symlink
 -SYSVLINKDIR = /etc/rc2.d
-+SYSVLINKDIR = /etc/rc.d/rc3.d
++SYSVLINKDIR = /etc/rc.d/rc2.d
  
  # If you use sysv, specify the name of the symlink
  SYSVLINK = S19printbill
-diff -ur printbill-4.0.6.orig/Makefile printbill-4.0.6/Makefile
---- printbill-4.0.6.orig/Makefile	Tue Sep 24 23:39:02 2002
-+++ printbill-4.0.6/Makefile	Wed Sep 25 11:25:01 2002
-@@ -17,26 +17,26 @@
+diff -urN printbill-4.2.0.orig/Makefile printbill-4.2.0/Makefile
+--- printbill-4.2.0.orig/Makefile	2003-05-06 03:44:26.000000000 +0200
++++ printbill-4.2.0/Makefile	2003-08-09 14:53:45.000000000 +0200
+@@ -28,26 +28,26 @@
  	mkdir -p $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
  	mkdir -p $(DESTDIR)$(PMOD_HOME)/Printbill
  	
--	install -o $(OWNER) -g $(GROUP) -m 0755 $(BIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
--	install -o $(OWNER) -g $(GROUP) -m 0755 $(SBIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/sbin
--	install -o $(OWNER) -g $(GROUP) -m 0644 $(PERL_MODS) $(DESTDIR)$(PMOD_HOME)/Printbill
--	install -o $(OWNER) -g $(GROUP) -m 0644 $(MAN1_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man1
--	install -o $(OWNER) -g $(GROUP) -m 0644 $(MAN5_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man5
--	install -o $(OWNER) -g $(GROUP) -m 0644 $(MAN8_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
-+	install -m 0755 $(BIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
-+	install -m 0755 $(SBIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/sbin
-+	install -m 0644 $(PERL_MODS) $(DESTDIR)$(PMOD_HOME)/Printbill
-+	install -m 0644 $(MAN1_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man1
-+	install -m 0644 $(MAN5_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man5
-+	install -m 0644 $(MAN8_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0755 $(BIN_PERL_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0755 $(SBIN_PERL_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/sbin
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0644 $(PERL_MODS) $(DESTDIR)$(PMOD_HOME)/Printbill
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0644 $(MAN1_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man1
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0644 $(MAN5_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man5
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0644 $(MAN8_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
++	$(INSTALL) -m 0755 $(BIN_PERL_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
++	$(INSTALL) -m 0755 $(SBIN_PERL_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/sbin
++	$(INSTALL) -m 0644 $(PERL_MODS) $(DESTDIR)$(PMOD_HOME)/Printbill
++	$(INSTALL) -m 0644 $(MAN1_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man1
++	$(INSTALL) -m 0644 $(MAN5_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man5
++	$(INSTALL) -m 0644 $(MAN8_PAGES) $(DESTDIR)$(TOPLEVEL_HOME)/$(MAN)/man8
  
  	if [ ${DO_CGI} = "y" ] ; then\
  		mkdir -p $(DESTDIR)$(CGI_BIN) ; \
--		install -o $(OWNER) -g $(GROUP) -m 0755 $(CGI_SCRIPTS) $(DESTDIR)$(CGI_BIN) ; \
-+		install -m 0755 $(CGI_SCRIPTS) $(DESTDIR)$(CGI_BIN) ; \
+-		$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0755 $(CGI_SCRIPTS) $(DESTDIR)$(CGI_BIN) ; \
++		$(INSTALL) -m 0755 $(CGI_SCRIPTS) $(DESTDIR)$(CGI_BIN) ; \
  	fi;
  
- 	install -d -m 0755 $(DESTDIR)/etc/printbill
--	install -o $(OWNER) -g $(GROUP) -m 644 $(CONFIG_FILES) $(DESTDIR)/etc/printbill
-+	install -m 644 $(CONFIG_FILES) $(DESTDIR)/etc/printbill
+ 	$(INSTALL) -d -m 0755 $(DESTDIR)/etc/printbill
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 644 $(CONFIG_FILES) $(DESTDIR)/etc/printbill
++	$(INSTALL) -m 644 $(CONFIG_FILES) $(DESTDIR)/etc/printbill
  	
--	install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
--	install -o $(OWNER) -g $(GROUP) -m 0644 docs/* $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
--	install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
--	install -o $(OWNER) -g $(GROUP) -m 0755 perl/buy perl/printbill_billme $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
--	install -o $(OWNER) -g $(GROUP) -m 0644 examples/example_pq.html examples/printbillrc examples/printcap $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
-+	install -d -m 0755 $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
-+	install -m 0644 docs/* $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
-+	install -d -m 0755 $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
-+	install  -m 0755 perl/buy perl/printbill_billme $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
-+	install  -m 0644 examples/example_pq.html examples/printbillrc examples/printcap $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
+-	$(INSTALL) -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0644 docs/* $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
+-	$(INSTALL) -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0755 perl/buy perl/printbill_billme $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0644 examples/example_pq.html examples/printbillrc examples/printcap $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
++	$(INSTALL) -d -m 0755 $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
++	$(INSTALL) -m 0644 docs/* $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill
++	$(INSTALL) -d -m 0755 $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
++	$(INSTALL) -m 0755 perl/buy perl/printbill_billme $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
++	$(INSTALL) -m 0644 examples/example_pq.html examples/printbillrc examples/printcap $(DESTDIR)$(TOPLEVEL_HOME)/share/doc/printbill/examples
  
  	@echo
  	@echo Installation completed. Assuming you didn\'t see any horrible error messages,
-@@ -52,12 +52,12 @@
- 	@echo
+@@ -65,13 +65,13 @@
+ install-init: install-init-script install-init-link
  
- install-init:
--	install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(INITDIR)
--	install -o $(OWNER) -g $(GROUP) -m 0755 $(INITSCRIPTDIR)/$(INITSCRIPT) $(DESTDIR)$(INITDIR)
-+	install -d -m 0755  $(DESTDIR)$(INITDIR)
-+	install  -m 0755 $(INITSCRIPTDIR)/$(INITSCRIPT) $(DESTDIR)$(INITDIR)
+ install-init-script:
+-	$(INSTALL) -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(INITDIR)
+-	$(INSTALL) -o $(OWNER) -g $(GROUP) -m 0755 $(INITSCRIPTDIR)/$(INITSCRIPT) $(DESTDIR)$(INITDIR)
++	$(INSTALL) -d -m 0755 $(DESTDIR)$(INITDIR)
++	$(INSTALL) -m 0755 $(INITSCRIPTDIR)/$(INITSCRIPT) $(DESTDIR)$(INITDIR)
  
- 	if [ ${INITSTYLE} = "sysv" ] ; then\
--		install -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(SYSVLINKDIR) ; \
-+		install -d -m 0755  $(DESTDIR)$(SYSVLINKDIR) ; \
  # This one should be absolute - RedHat & Debian use the same
+ 
+ install-init-link:
+ 	if [ ${INITSTYLE} = "sysv" ] ; then\
+-		$(INSTALL) -d -m 0755 -o $(OWNER) -g $(GROUP) $(DESTDIR)$(SYSVLINKDIR) ; \
++		$(INSTALL) -d -m 0755 $(DESTDIR)$(SYSVLINKDIR) ; \
  		ln -sf ../init.d/$(INITSCRIPT) $(DESTDIR)$(SYSVLINKDIR)/$(SYSVLINK) ; \
  	fi;
--	
-\ No newline at end of file
-+	
-Only in printbill-4.0.6: Makefile~
+diff -urN printbill-4.2.0.orig/po/Makefile printbill-4.2.0/po/Makefile
+--- printbill-4.2.0.orig/po/Makefile	2003-05-27 15:30:22.000000000 +0200
++++ printbill-4.2.0/po/Makefile	2003-08-09 14:57:13.000000000 +0200
+@@ -10,7 +10,7 @@
+ 		if [ ! -d $(DESTDIR)$(LOCALEDIR)/$$i/LC_MESSAGES ] ; then\
+ 			mkdir -p $(DESTDIR)$(LOCALEDIR)/$$i/LC_MESSAGES ; \
+ 		fi ; \
+-		install -o root -g root -m 0644 $$i/printbill.mo $(DESTDIR)$(LOCALEDIR)/$$i/LC_MESSAGES/printbill.mo ; \
++		install -m 0644 $$i/printbill.mo $(DESTDIR)$(LOCALEDIR)/$$i/LC_MESSAGES/printbill.mo ; \
+ 	done
+ 
+ clean:
+diff -urN printbill-4.2.0.orig/src/Makefile printbill-4.2.0/src/Makefile
+--- printbill-4.2.0.orig/src/Makefile	2003-04-26 07:02:15.000000000 +0200
++++ printbill-4.2.0/src/Makefile	2003-08-09 14:57:21.000000000 +0200
+@@ -20,4 +20,4 @@
+ 
+ install:
+ 	mkdir -p $(DESTDIR)$(TOPLEVEL_HOME)/bin
+-	install -o $(OWNER) -g $(GROUP) -m 0755 $(BIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
++	install -m 0755 $(BIN_PROGS) $(DESTDIR)$(TOPLEVEL_HOME)/bin
