@@ -106,9 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc docs/* examples/print* examples/*.html
-
+%dir %{_sysconfdir}/printbill
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printbill/*
-
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/*
