@@ -3,7 +3,7 @@ Name:		printbill
 Summary:	Sophistocated print billing / accounting system for lprng
 Summary(pl):	Wymy¶lny system rozliczania / kontroli dla lprng
 Version:	4.2.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Printing
 Vendor:		Daniel Franklin
