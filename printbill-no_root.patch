@@ -15,7 +15,7 @@ diff -urN printbill-4.2.0.orig/Config.redhat printbill-4.2.0/Config.redhat
  
  # If you use sysv, specify the location of the symlink
 -SYSVLINKDIR = /etc/rc2.d
-+SYSVLINKDIR = /etc/rc.d/rc2.d
++SYSVLINKDIR = /etc/rc.d/rc3.d
  
  # If you use sysv, specify the name of the symlink
  SYSVLINK = S19printbill
