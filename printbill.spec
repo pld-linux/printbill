@@ -13,6 +13,7 @@ Source1:	%{name}.init
 Patch0:		%{name}-no_root.patch
 URL:		http://ieee.uow.edu.au/~daniel/software/printbill/
 BuildRequires:	libpng-devel
+BuildRequires:	rpm-perlprov
 Requires:	LPRng
 Requires:	ghostscript
 Requires:	ghostscript-fonts-std
@@ -65,11 +66,16 @@ poleceñ, jak te¿ przez interfejs web.
 ln -sf Config.redhat Config
 
 %build
-%{__make} CFLAGS="%{rpmcflags}"
+%{__make} \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	PMOD_HOME=%{perl_vendorlib}
+
 install -D %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
 
@@ -101,14 +107,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc docs/* examples/print* examples/*.html
 
-%config %{_sysconfdir}/printbill/*
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/printbill/*
 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/*
-%{_libdir}/perl5/site_perl/Printbill/*
+%{perl_vendorlib}/Printbill
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_mandir}/man8/*
-%dir /var/lib/%{name}/
+%dir /var/lib/%{name}
+%dir /var/lib/%{name}/cgi-bin
 %attr(755,root,root) /var/lib/%{name}/cgi-bin/*.pl
