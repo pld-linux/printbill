@@ -21,7 +21,7 @@ case "$1" in
 		daemon printbilld
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/printbilld
-	else 
+	else
 		msg_already_running printbill
 	fi
 	;;
@@ -51,7 +51,7 @@ case "$1" in
 	else
 		msg_not_running printbill >&2
 		exit 7
-	fi 
+	fi
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
