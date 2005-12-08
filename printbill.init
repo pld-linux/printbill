@@ -7,9 +7,6 @@
 # On RedHat systems this will start it just before lprng
 # so the socket is read and waiting when lprng starts.
 
-# Get config.
-#. /etc/sysconfig/network
-
 # Get functions
 . /etc/rc.d/init.d/functions
 
