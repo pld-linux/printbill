@@ -1,7 +1,7 @@
 %include	/usr/lib/rpm/macros.perl
 Name:		printbill
 Summary:	Sophistocated print billing / accounting system for LPRng
-Summary(pl):	Wymy¶lny system rozliczania / kontroli dla LPRng
+Summary(pl.UTF-8):   WymyÅ›lny system rozliczania / kontroli dla LPRng
 Version:	4.2.0
 Release:	2
 License:	GPL
@@ -41,24 +41,24 @@ which may be of interest to administrators. The system may be managed
 via either a command-line application or via a convenient web
 interface (for non-tech people).
 
-%description -l pl
-Printbill oblicza ilo¶æ tuszu/toneru i liczbê stron u¿ywan± podczas
-drukowania dokumentu. Wykorzystuje ghostscripta do konwersji plików
-postscriptowych do bitmap PNG, nastêpnie oblicza stopieñ zaczernienia
-lub koloru do obliczenia zu¿ycia tuszu. Cennik mo¿e byæ niezale¿nie
-ustawiony dla ka¿dej drukarki, ustawiaj±c przeliczniki na czarny i
+%description -l pl.UTF-8
+Printbill oblicza iloÅ›Ä‡ tuszu/toneru i liczbÄ™ stron uÅ¼ywanÄ… podczas
+drukowania dokumentu. Wykorzystuje ghostscripta do konwersji plikÃ³w
+postscriptowych do bitmap PNG, nastÄ™pnie oblicza stopieÅ„ zaczernienia
+lub koloru do obliczenia zuÅ¼ycia tuszu. Cennik moÅ¼e byÄ‡ niezaleÅ¼nie
+ustawiony dla kaÅ¼dej drukarki, ustawiajÄ…c przeliczniki na czarny i
 kolorowy tusz/toner oraz strony. Obliczanie cen wymaga sporej mocy
-obliczeniowej od CPU, dlatego printbill wywo³uje kilka niezale¿nych
-procesów - zadania mog± nie byæ drukowane w kolejno¶ci wysy³ania do
+obliczeniowej od CPU, dlatego printbill wywoÅ‚uje kilka niezaleÅ¼nych
+procesÃ³w - zadania mogÄ… nie byÄ‡ drukowane w kolejnoÅ›ci wysyÅ‚ania do
 kolejki. Na maszynach SMP wykorzysta moc wszystkich zainstalowanych
-procesorów.
+procesorÃ³w.
 
-U¿ytkownicy mog± mieæ ustalan± quotê i jest ona automatycznie
-zmniejszana podczas drukowania. Alternatywnie mo¿na ustawiæ accounting
-bez rozliczania dla u¿ytkownika lub drukarki. Printbill zachowuje
-tak¿e dok³adne statystyki które mog± byæ interesuj±ce dla
-administratorów. System mo¿e byæ zarz±dzany przez narzêdzia z linii
-poleceñ, jak te¿ przez interfejs web.
+UÅ¼ytkownicy mogÄ… mieÄ‡ ustalanÄ… quotÄ™ i jest ona automatycznie
+zmniejszana podczas drukowania. Alternatywnie moÅ¼na ustawiÄ‡ accounting
+bez rozliczania dla uÅ¼ytkownika lub drukarki. Printbill zachowuje
+takÅ¼e dokÅ‚adne statystyki ktÃ³re mogÄ… byÄ‡ interesujÄ…ce dla
+administratorÃ³w. System moÅ¼e byÄ‡ zarzÄ…dzany przez narzÄ™dzia z linii
+poleceÅ„, jak teÅ¼ przez interfejs web.
 
 %prep
 %setup -q
