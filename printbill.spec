@@ -16,7 +16,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	rpm-perlprov
 Requires:	LPRng
 Requires:	ghostscript
-Requires:	ghostscript-fonts-std
+Requires:	fonts-Type1-urw
 Requires:	gnuplot
 Requires:	samba
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
