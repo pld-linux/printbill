@@ -15,8 +15,8 @@ URL:		http://ieee.uow.edu.au/~daniel/software/printbill/
 BuildRequires:	libpng-devel
 BuildRequires:	rpm-perlprov
 Requires:	LPRng
-Requires:	ghostscript
 Requires:	fonts-Type1-urw
+Requires:	ghostscript
 Requires:	gnuplot
 Requires:	samba
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
