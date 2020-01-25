@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.perl
 Name:		printbill
 Summary:	Sophistocated print billing / accounting system for LPRng
 Summary(pl.UTF-8):	Wymyślny system rozliczania / kontroli dla LPRng
